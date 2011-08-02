@@ -1,0 +1,21 @@
+{% load weave_tags %}<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlConfig SYSTEM "sqlconfig.dtd">
+<sqlConfig serverName="WEAVE Server">
+    <databaseConfig 
+        connection="portal_db"
+        dataConfigTable="{{ attribute_column_table }}" 
+        geometryConfigTable="{{ geometry_column_table }}" 
+        schema="public" />
+    
+    <connection 
+        dbms="{{ weave_settings.DBMS }}" 
+        database="{{ settings.DATABASE_NAME }}" 
+        user="{{ settings.DATABASE_USER }}"
+        pass="{{ settings.DATABASE_PASSWORD }}" 
+        name="{{ weave_settings.CONNECTION }}" />
+    
+    <accessLog
+        connection="portal_db"
+        schema="weave"
+        table="accesslog" /><!-- table will be created automatically -->
+</sqlConfig>
