@@ -15,7 +15,7 @@
         name="{{ weave_settings.CONNECTION }}" />
     
     <accessLog
-        connection="portal_db"
-        schema="weave"
-        table="accesslog" /><!-- table will be created automatically -->
+        connection="{{ weave_settings.CONNECTION }}"
+        schema="public"
+        table="weave_accesslog" /><!-- table will be created automatically -->
 </sqlConfig>
