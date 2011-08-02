@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding model 'AttributeColumn'
-        db.create_table('weave_tools_attributecolumn', (
+        db.create_table('weave_attributecolumn', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=256)),
             ('keyType', self.gf('django.db.models.fields.CharField')(max_length=256)),
@@ -25,13 +25,13 @@ class Migration(SchemaMigration):
             ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')(null=True)),
             ('display_name', self.gf('django.db.models.fields.CharField')(max_length=256)),
         ))
-        db.send_create_signal('weave_tools', ['AttributeColumn'])
+        db.send_create_signal('weave', ['AttributeColumn'])
 
         # Adding unique constraint on 'AttributeColumn', fields ['name', 'keyType', 'year', 'dataTable']
-        db.create_unique('weave_tools_attributecolumn', ['name', 'keyType', 'year', 'dataTable'])
+        db.create_unique('weave_attributecolumn', ['name', 'keyType', 'year', 'dataTable'])
 
         # Adding model 'GeometryCollection'
-        db.create_table('weave_tools_geometrycollection', (
+        db.create_table('weave_geometrycollection', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=256)),
             ('keyType', self.gf('django.db.models.fields.CharField')(max_length=256)),
@@ -40,32 +40,32 @@ class Migration(SchemaMigration):
             ('schema', self.gf('django.db.models.fields.CharField')(max_length=256)),
             ('tablePrefix', self.gf('django.db.models.fields.CharField')(max_length=256)),
         ))
-        db.send_create_signal('weave_tools', ['GeometryCollection'])
+        db.send_create_signal('weave', ['GeometryCollection'])
 
         # Adding model 'ClientConfiguration'
-        db.create_table('weave_tools_clientconfiguration', (
+        db.create_table('weave_clientconfiguration', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
             ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, db_index=True)),
             ('content', self.gf('django.db.models.fields.TextField')(default='')),
             ('content_format', self.gf('django.db.models.fields.CharField')(default='json', max_length=4)),
         ))
-        db.send_create_signal('weave_tools', ['ClientConfiguration'])
+        db.send_create_signal('weave', ['ClientConfiguration'])
 
 
     def backwards(self, orm):
         
         # Removing unique constraint on 'AttributeColumn', fields ['name', 'keyType', 'year', 'dataTable']
-        db.delete_unique('weave_tools_attributecolumn', ['name', 'keyType', 'year', 'dataTable'])
+        db.delete_unique('weave_attributecolumn', ['name', 'keyType', 'year', 'dataTable'])
 
         # Deleting model 'AttributeColumn'
-        db.delete_table('weave_tools_attributecolumn')
+        db.delete_table('weave_attributecolumn')
 
         # Deleting model 'GeometryCollection'
-        db.delete_table('weave_tools_geometrycollection')
+        db.delete_table('weave_geometrycollection')
 
         # Deleting model 'ClientConfiguration'
-        db.delete_table('weave_tools_clientconfiguration')
+        db.delete_table('weave_clientconfiguration')
 
 
     models = {
@@ -76,7 +76,7 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'weave_tools.attributecolumn': {
+        'weave.attributecolumn': {
             'Meta': {'unique_together': "(('name', 'keyType', 'year', 'dataTable'),)", 'object_name': 'AttributeColumn'},
             'connection': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']", 'null': 'True'}),
@@ -93,7 +93,7 @@ class Migration(SchemaMigration):
             'sqlQuery': ('django.db.models.fields.CharField', [], {'max_length': '2048'}),
             'year': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'})
         },
-        'weave_tools.clientconfiguration': {
+        'weave.clientconfiguration': {
             'Meta': {'object_name': 'ClientConfiguration'},
             'content': ('django.db.models.fields.TextField', [], {'default': "''"}),
             'content_format': ('django.db.models.fields.CharField', [], {'default': "'json'", 'max_length': '4'}),
@@ -101,7 +101,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'})
         },
-        'weave_tools.geometrycollection': {
+        'weave.geometrycollection': {
             'Meta': {'object_name': 'GeometryCollection'},
             'connection': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -113,4 +113,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['weave_tools']
+    complete_apps = ['weave']
