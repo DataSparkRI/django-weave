@@ -27,7 +27,7 @@ class Command(BaseCommand):
             'weave_settings': settings.WEAVE if hasattr(settings, 'WEAVE') else {},
             'settings': settings
         }
-        content = render_to_string('weave_tools/sqlconfig.xml', context)
+        content = render_to_string('weave/sqlconfig.xml', context)
         open(path, 'w').write(content)
 
 
