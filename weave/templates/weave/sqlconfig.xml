@@ -2,7 +2,7 @@
 <!DOCTYPE sqlConfig SYSTEM "sqlconfig.dtd">
 <sqlConfig serverName="WEAVE Server">
     <databaseConfig 
-        connection="portal_db"
+        connection="{{ weave_settings.CONNECTION }}"
         dataConfigTable="{{ attribute_column_table }}" 
         geometryConfigTable="{{ geometry_column_table }}" 
         schema="public" />
