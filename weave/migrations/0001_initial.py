@@ -23,7 +23,7 @@ class Migration(SchemaMigration):
             ('sqlQuery', self.gf('django.db.models.fields.CharField')(max_length=2048)),
             ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'], null=True)),
             ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')(null=True)),
-            ('display_name', self.gf('django.db.models.fields.CharField')(max_length=256)),
+            ('display_name', self.gf('django.db.models.fields.CharField')(default='', max_length=256, blank=True)),
         ))
         db.send_create_signal('weave', ['AttributeColumn'])
 
@@ -82,7 +82,7 @@ class Migration(SchemaMigration):
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']", 'null': 'True'}),
             'dataTable': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'dataType': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
-            'display_name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
+            'display_name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '256', 'blank': 'True'}),
             'geometryCollection': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'keyType': ('django.db.models.fields.CharField', [], {'max_length': '256'}),

@@ -19,7 +19,9 @@ class BaseAttributeColumn(models.Model):
     entries.
 
     The only difference from Weave's schema is the introduction of
-    `unique_together`.
+    `unique_together`. Any fields added in addition to these must be nullable,
+    or have a default value set, otherwise updates through Weave's admin console
+    will fail.
     """
     DATA_TYPE_CHOICES = (
         ('number', 'number'),
@@ -54,7 +56,7 @@ class AttributeColumn(BaseAttributeColumn):
     content_type = models.ForeignKey(ContentType, null=True)
     object_id = models.PositiveIntegerField(null=True)
     source = generic.GenericForeignKey('content_type', 'object_id')    
-    display_name = models.CharField(max_length=256)
+    display_name = models.CharField(max_length=256,blank=True,default='')
 
     objects = AttributeColumnManager()
 
