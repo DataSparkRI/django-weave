@@ -56,7 +56,7 @@ class AttributeColumn(BaseAttributeColumn):
     content_type = models.ForeignKey(ContentType, null=True)
     object_id = models.PositiveIntegerField(null=True)
     source = generic.GenericForeignKey('content_type', 'object_id')    
-    display_name = models.CharField(max_length=256,blank=True,default='')
+    display_name = models.CharField(max_length=256,blank=True,default='',null=True)
 
     objects = AttributeColumnManager()
 

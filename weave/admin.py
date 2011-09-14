@@ -4,7 +4,6 @@ from weave.models import ClientConfiguration, GeometryCollection, \
                             AttributeColumn
 
 class ClientConfigurationAdmin(admin.ModelAdmin):
-    exclude = ('file', )
     prepopulated_fields = {"slug": ("name",)}
     def change_view(self, request, object_id, extra_context=None):
         context = {
