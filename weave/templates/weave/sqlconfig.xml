@@ -13,9 +13,4 @@
         user="{{ settings.DATABASE_USER }}"
         pass="{{ settings.DATABASE_PASSWORD }}" 
         name="{{ weave_settings.CONNECTION }}" />
-    
-    <accessLog
-        connection="{{ weave_settings.CONNECTION }}"
-        schema="public"
-        table="weave_accesslog" /><!-- table will be created automatically -->
 </sqlConfig>
