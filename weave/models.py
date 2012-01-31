@@ -89,16 +89,27 @@ class ClientConfiguration(models.Model):
     FORMAT_CHOICES = (
         ('json', 'json'),
         ('xml', 'xml'),
+        ('file', 'file')
     )
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True, db_index=True)
     content = models.TextField(default='')  # TODO: add minimal config
-    content_format = models.CharField(max_length=4, choices=FORMAT_CHOICES, default='json')
+    # name of the file, relative to Tomcat's/weave's docroot. This will be passed on as
+    # as a url to the weave client
+    content_file = models.CharField(max_length=100, unique=True, null=True, blank=True)
+    content_format = models.CharField(max_length=4, choices=FORMAT_CHOICES, default='file')
 
     def save(self, *args, **kwargs):
         from weave.util import unique_slugify
         unique_slugify(self, self.name)
         super(ClientConfiguration, self).save(*args, **kwargs)
+
+    @property
+    def location_for_client(self):
+        """ The url or path that should be passed to the Weave client to load this config """
+        if self.content_format not in ('file', ):
+            raise NotImplemented('Only file-based configs may be saved at this time')
+        return "/weave_docroot/%s" % self.content_file
 
     def __unicode__(self):
         return "%s" % self.name
