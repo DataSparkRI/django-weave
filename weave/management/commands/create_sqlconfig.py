@@ -6,6 +6,7 @@ from django.conf import settings
 
 from weave.models import AttributeColumn, GeometryCollection
 
+
 class Command(BaseCommand):
     help = "Create a default sqlconfig.xml for Weave"
 
@@ -29,5 +30,3 @@ class Command(BaseCommand):
         }
         content = render_to_string('weave/sqlconfig.xml', context)
         open(path, 'w').write(content)
-
-
