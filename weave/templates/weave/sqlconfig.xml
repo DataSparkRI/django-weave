@@ -1,16 +1,19 @@
-{% load weave_tags %}<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlConfig SYSTEM "sqlconfig.dtd">
-<sqlConfig serverName="WEAVE Server">
+<sqlConfig serverName="Open Indicators Server">
     <databaseConfig 
-        connection="{{ weave_settings.CONNECTION }}"
+        connection="{{ weave_settings.CONNECTION }}" 
         dataConfigTable="{{ attribute_column_table }}" 
         geometryConfigTable="{{ geometry_column_table }}" 
         schema="public" />
-    
     <connection 
+        database="{{ settings.DATABASES.default.NAME }}" 
         dbms="{{ weave_settings.DBMS }}" 
-        database="{{ settings.DATABASE_NAME }}" 
-        user="{{ settings.DATABASE_USER }}"
-        pass="{{ settings.DATABASE_PASSWORD }}" 
-        name="{{ weave_settings.CONNECTION }}" />
+        folderName="" 
+        ip="{{ settings.DATABASES.default.HOST }}" 
+        is_superuser="{{ weave_settings.IS_SUPERUSER }}" 
+        name="{{ weave_settings.CONNECTION }}" 
+        pass="{{ settings.DATABASES.default.PASSWORD }}" 
+        port="{{ settings.DATABASES.default.PORT }}" 
+        user="{{ settings.DATABASES.default.USER }}" />
 </sqlConfig>
