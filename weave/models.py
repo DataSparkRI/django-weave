@@ -93,7 +93,7 @@ class ClientConfiguration(models.Model):
     )
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True, db_index=True)
-    content = models.TextField(default='')  # TODO: add minimal config
+    content = models.TextField(default='', blank=True)  # TODO: add minimal config
     # name of the file, relative to Tomcat's/weave's docroot. This will be passed on as
     # as a url to the weave client
     content_file = models.CharField(max_length=100, unique=True, null=True, blank=True)
