@@ -59,11 +59,11 @@ class AttributeColumn(BaseAttributeColumn):
 
     @property
     def weave_display_name(self):
-        return self.display_name
+        return self.title
 
     @property
     def full_display_name(self):
-        return self.display_name
+        return self.title
 
     def __unicode__(self):
         return u"%s" % self.full_display_name
