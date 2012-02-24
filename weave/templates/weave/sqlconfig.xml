@@ -9,7 +9,6 @@
     <connection 
         database="{{ settings.DATABASES.default.NAME }}" 
         dbms="{{ weave_settings.DBMS }}" 
-        folderName="{{ settings.DATABASES.default.NAME }}" 
         ip="{{ settings.DATABASES.default.HOST }}" 
         is_superuser="true" 
         name="{{ weave_settings.CONNECTION }}" 
