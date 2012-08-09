@@ -91,7 +91,7 @@ class ClientConfiguration(models.Model):
         ('xml', 'xml'),
         ('file', 'file')
     )
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, db_index=True)
     content = models.TextField(default='', blank=True)  # TODO: add minimal config
     # name of the file, relative to Tomcat's/weave's docroot. This will be passed on as
