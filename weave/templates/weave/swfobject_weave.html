@@ -1,4 +1,3 @@
-{% block extrahead %}                
 <script type="text/javascript" src="{{ MEDIA_URL}}swfobject/swfobject.js"></script>
 <script type="text/javascript">
    var flashvars = {};
@@ -10,7 +9,6 @@
    var attributes = {};
    swfobject.embedSWF("{{ MEDIA_URL }}weave/weave.swf", "{% if weave_object_id %}{{ weave_object_id }}{% else %}weave{% endif %}", "{{ width }}", "{{ height}}", "9.0.0", "{{ MEDIA_URL}}swfobject/expressInstall.swf", flashvars, params, attributes);
 </script>
-{% endblock %}
 <div id="{% if weave_object_id %}{{ weave_object_id }}{% else %}weave{% endif %}">
   <p>
     <a href="https://www.adobe.com/go/getflashplayer">
