@@ -1,12 +1,8 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-
-
-class AttributeColumnManager(models.Manager):
-    def years(self):
-        return self.exclude(year=None).exclude(year='') \
-                   .values_list('year', flat=True).order_by('year').distinct()
+from weave.managers import AttributeColumnManager, CCDataStoryManager, CCReportManager, \
+                            CCUserGeneratedManager, CCUnassignedManager
 
 
 class BaseAttributeColumn(models.Model):
@@ -99,6 +95,15 @@ class ClientConfiguration(models.Model):
     content_file = models.CharField(max_length=100, unique=True, null=True, blank=True)
     content_format = models.CharField(max_length=4, choices=FORMAT_CHOICES, default='file')
 
+    def cc_type(self):
+        is_user_generated = self.weavefile_set.all().count() > 0
+        in_datastory = self.page_set.all().count() > 0
+        in_report = self.report_set.all().count() > 0
+
+        return 'ug: %s / ds: %s / rpt: %s' % (is_user_generated, in_datastory, in_report)
+    cc_type.short_description = 'CC Type'
+      
+
     def save(self, *args, **kwargs):
         from weave.util import unique_slugify
         unique_slugify(self, self.name)
@@ -113,3 +118,48 @@ class ClientConfiguration(models.Model):
 
     def __unicode__(self):
         return "%s" % self.name
+
+class CCDataStory(ClientConfiguration):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Client configurations (Datastory)'
+        verbose_name = 'Client configuration (Datastory)'
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    objects = CCDataStoryManager()
+
+class CCReport(ClientConfiguration):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Client configurations (Report)'
+        verbose_name = 'Client configuration (Report)'
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    objects = CCReportManager()
+
+class CCUserGenerated(ClientConfiguration):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Client configurations (User-generated)'
+        verbose_name = 'Client configuration (User-generated)'
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    objects = CCUserGeneratedManager()
+
+
+class CCUnassigned(ClientConfiguration):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Client configurations (Unassigned)'
+        verbose_name = 'Client configuration (Unassigned)'
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    objects = CCUnassignedManager()
